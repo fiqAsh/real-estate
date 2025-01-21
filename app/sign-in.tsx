@@ -1,32 +1,59 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import images from "@/constants/images";
-import icons from "@/constants/icons";
+import {
+	Alert,
+	Image,
+	ScrollView,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 
-const SignIn = () => {
-	const handleLogin = () => {};
+import { login } from "@/lib/appwrite";
+import { Redirect } from "expo-router";
+import { useGlobalContext } from "@/lib/global-provider";
+import icons from "@/constants/icons";
+import images from "@/constants/images";
+
+const Auth = () => {
+	const { refetch, loading, isLogged } = useGlobalContext();
+
+	if (!loading && isLogged) return <Redirect href="/" />;
+
+	const handleLogin = async () => {
+		const result = await login();
+		if (result) {
+			refetch();
+		} else {
+			Alert.alert("Error", "Failed to login");
+		}
+	};
+
 	return (
 		<SafeAreaView className="bg-white h-full">
-			<ScrollView contentContainerClassName="h-full">
+			<ScrollView
+				contentContainerStyle={{
+					height: "100%",
+				}}
+			>
 				<Image
 					source={images.onboarding}
 					className="w-full h-4/6"
 					resizeMode="contain"
-				></Image>
+				/>
 
 				<View className="px-10">
 					<Text className="text-base text-center uppercase font-rubik text-black-200">
-						welcome to real estate
+						Welcome To Real Scout
 					</Text>
 
 					<Text className="text-3xl font-rubik-bold text-black-300 text-center mt-2">
-						Lets Get you closer to {"\n"}
-						<Text className="text-primary-300">Your Ideal home</Text>
+						Let's Get You Closer To {"\n"}
+						<Text className="text-primary-300">Your Ideal Home</Text>
 					</Text>
 
-					<Text className="text-lg font-rubik">
-						Login to Real estate with google
+					<Text className="text-lg font-rubik text-black-200 text-center mt-12">
+						Login to Real Scout with Google
 					</Text>
 
 					<TouchableOpacity
@@ -50,4 +77,4 @@ const SignIn = () => {
 	);
 };
 
-export default SignIn;
+export default Auth;
