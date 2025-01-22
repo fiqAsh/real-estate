@@ -1,5 +1,9 @@
 # Welcome to your Expo app 👋
 
+find the apk for this app here:
+(open this link with an android device)
+https://expo.dev/accounts/ashfiq/projects/real-estate/builds/67154dc0-81f0-495e-a885-bc9992faa57272
+
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
 ## Get started
